@@ -6,7 +6,7 @@ void setup() {
 }
 
 void loop() {
-  gfAveragedValue = analogRead(33) / (float)4096 * 3.3  * 10 * 0.1 + gfAveragedValue * (1-0.1); 
+  gfAveragedValue = analogRead(33) / (float)4096 * 3.3  * 0.1 + gfAveragedValue * (1-0.1); 
   Serial.println(gfAveragedValue);
   delay(10);
 }
