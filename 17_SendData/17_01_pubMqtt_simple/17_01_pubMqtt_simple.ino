@@ -102,9 +102,9 @@ void doPubMqtt(char * cValue)
       return;
     }
   }
-  mqttClient.loop();
+  //mqttClient.loop();
   boolean bFlagSucceed=mqttClient.publish(topic,cValue);
-  free(cValue);
+  //free(cValue);
   if(bFlagSucceed)
    {
     Serial.print("done: ");
@@ -117,6 +117,7 @@ void doPubMqtt(char * cValue)
 
 void setup() {
   Serial.begin(115200);
+  gviCountWatchDog=0; 
   init_TimerInterrupt();
   initWifiClient();
   connectMqtt();
@@ -124,19 +125,22 @@ void setup() {
 }
 
 void loop(){
-
+ Serial.println("start loop");
   portENTER_CRITICAL(&timerMux);
     gviCountWatchDog=0; //clear Counter
   portEXIT_CRITICAL(&timerMux);
 
   float fSensValue=gu32Count;
 
-  char cValue[11];
+  //char cValue[11];
+  char *cValue;
+  cValue = (char *)malloc(12);
   sprintf(cValue, "%1.5e", fSensValue);
 
   doPubMqtt(cValue);
-
+  free(cValue);
   
   delay(2000);
   gu32Count++;
+
 }
