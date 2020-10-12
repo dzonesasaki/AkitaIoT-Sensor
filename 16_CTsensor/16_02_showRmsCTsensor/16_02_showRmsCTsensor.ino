@@ -148,14 +148,16 @@ float calc_fundamental(float fMean){
 	unsigned int uiinx=0;
 	for(unsigned int uic = 0;uic < N_DFT_LOOP_INT ; uic++){
     for(unsigned int uilp =0;uilp<(N_SAMPLE_POWER_CYCLE);uilp++){
-        fSumR += gfCosTable[uilp]*((float)guiStream[uiinx]-fMean);
-        fSumI += gfSinTable[uilp]*((float)guiStream[uiinx]-fMean);
+        fTmp = ((float)guiStream[uiinx]-fMean);
+        fSumR += gfCosTable[uilp]*fTmp;
+        fSumI += gfSinTable[uilp]*fTmp;
 		    uiinx++;
     }//end for uilp
 	}//end for uic
     for(unsigned int uilp =0;uilp<(N_DFT_LOOP_TAIL);uilp++){
-        fSumR += gfCosTable[uilp]*((float)guiStream[uiinx]-fMean);
-        fSumI += gfSinTable[uilp]*((float)guiStream[uiinx]-fMean);
+        fTmp = ((float)guiStream[uiinx]-fMean);
+        fSumR += gfCosTable[uilp]*fTmp;
+        fSumI += gfSinTable[uilp]*fTmp;
 		    uiinx++;
     }//end for uilp
 //	for(unsigned int uilp =0;uilp<(MAX_SIZE-1);uilp++){
