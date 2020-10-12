@@ -63,6 +63,7 @@ void setup() {
     guiCountReadAdc=0;
     guiPreRead=0;
     gfValAve=0;
+    makeTable();
 
     unsigned int uiFlag=0;
     while(uiFlag==0)
@@ -98,16 +99,17 @@ void loop()
         //   fMean += (float)guiStream[uilp];
         // }//end for
         // fMean = fMean/(float)(MAX_SIZE-1);
-		fMean = calc_mean();
+		    fMean = calc_mean();
         // for(unsigned int uilp =0;uilp<(MAX_SIZE-1);uilp++){
         //   fDiff = (float)guiStream[uilp]-fMean;
         //   fSum += fDiff*fDiff;
         // }//end for
         // float fRms = sqrt(fSum/(float)(MAX_SIZE-1));
-		float fRms = calc_rms(fMean);
-		float fFund =calc_fundamental(fMean);
+		    float fRms = calc_rms(fMean);
+		    float fFund = calc_fundamental(fMean);
 
-        float fPow = fRms * FACT_POW * fFund;
+        //float fPow = fRms * FACT_POW * fFund;
+        float fPow = FACT_POW * fFund;
         Serial.print(fPow);
         Serial.print(" , ");
         Serial.println(fRms*FACT_CUR);
@@ -139,8 +141,8 @@ float calc_rms(float fMean){
 #define N_DFT_LOOP_INT (int)((MAX_SIZE-1)/N_SAMPLE_POWER_CYCLE)
 #define N_DFT_LOOP_TAIL (int)(MAX_SIZE-1 - N_DFT_LOOP_INT*N_SAMPLE_POWER_CYCLE)
 float calc_fundamental(float fMean){
-    float fSumR=0;
-    float fSumI=0;
+  float fSumR=0;
+  float fSumI=0;
 	float fTmp=0;
 	float fSumP=0;
 	unsigned int uiinx=0;
@@ -148,19 +150,20 @@ float calc_fundamental(float fMean){
     for(unsigned int uilp =0;uilp<(N_SAMPLE_POWER_CYCLE);uilp++){
         fSumR += gfCosTable[uilp]*((float)guiStream[uiinx]-fMean);
         fSumI += gfSinTable[uilp]*((float)guiStream[uiinx]-fMean);
-		uiinx++;
+		    uiinx++;
     }//end for uilp
 	}//end for uic
     for(unsigned int uilp =0;uilp<(N_DFT_LOOP_TAIL);uilp++){
         fSumR += gfCosTable[uilp]*((float)guiStream[uiinx]-fMean);
         fSumI += gfSinTable[uilp]*((float)guiStream[uiinx]-fMean);
-		uiinx++;
+		    uiinx++;
     }//end for uilp
-	for(unsigned int uilp =0;uilp<(MAX_SIZE-1);uilp++){
-        fTmp = (float)guiStream[uilp]-fMean;
-        fSumP += fTmp*fTmp;
-    }//end for uilp
+//	for(unsigned int uilp =0;uilp<(MAX_SIZE-1);uilp++){
+//        fTmp = (float)guiStream[uilp]-fMean;
+//        fSumP += fTmp*fTmp;
+//    }//end for uilp
 
-    float fFund = sqrt( (fSumR*fSumR+ fSumI*fSumI) / fSumP );
+  //float fFund = sqrt( (fSumR*fSumR+ fSumI*fSumI)*2/(float)(MAX_SIZE-1) / fSumP );
+  float fFund = sqrt( (fSumR*fSumR+ fSumI*fSumI)*2)/(float)(MAX_SIZE-1)  ;
 	return(fFund);
 }
