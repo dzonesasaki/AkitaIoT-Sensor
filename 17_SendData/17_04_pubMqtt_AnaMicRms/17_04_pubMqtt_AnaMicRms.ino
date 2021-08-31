@@ -23,12 +23,10 @@ portMUX_TYPE timer2Mux = portMUX_INITIALIZER_UNLOCKED;
 volatile int gviCountWatchDog=0;
 
 
-
-
 #define PIN_MIC_IN 33 
 #define MICROSEC_INTERRUPT_INTERVAL 45 //22kHz=45
 #define MAX_SIZE  16*1024 //131072 // 128*1024
-#define NUM_PREREAD_SIZE 2048
+#define NUM_PREREAD_SIZE (MAX_SIZE/16)
 hw_timer_t *handletimer0 = NULL;
 volatile SemaphoreHandle_t timerSemaphore;
 portMUX_TYPE timer0Mux = portMUX_INITIALIZER_UNLOCKED; //rer to https://techtutorialsx.com/2017/10/07/esp32-arduino-timer-interrupts/
@@ -84,17 +82,17 @@ void init_TimerInterrupt2()
   timerAttachInterrupt(handleTimer2, &irq_Timer2, true);
   timerAlarmWrite(handleTimer2, NUM_WDTIMER_MICROSEC, true); //[us] per 80 clock @ 80MHz
   timerAlarmEnable(handleTimer2);
-}//init_TimerInterrupt()
+}//init_TimerInterrupt2()
 
 
 void init_TimerInterrupt0()
 {
-	timerSemaphore = xSemaphoreCreateBinary();
-	handletimer0 = timerBegin(0, 80, true);
-	timerAttachInterrupt(handletimer0, &isr_timer0, true);
-	timerAlarmWrite(handletimer0,  MICROSEC_INTERRUPT_INTERVAL , true);//us
-	timerAlarmEnable(handletimer0);
-}//init_TimerInterrupt()
+  timerSemaphore = xSemaphoreCreateBinary();
+  handletimer0 = timerBegin(0, 80, true);
+  timerAttachInterrupt(handletimer0, &isr_timer0, true);
+  timerAlarmWrite(handletimer0,  MICROSEC_INTERRUPT_INTERVAL , true);//us
+  timerAlarmEnable(handletimer0);
+}//init_TimerInterrupt0()
 
 
 void initWifiClient(void){
@@ -196,13 +194,13 @@ void setup() {
   Serial.begin(115200);
   gviCountWatchDog=0; 
   init_TimerInterrupt2();
-  init_TimerInterrupt0();
   initWifiClient();
   connectMqtt();
+  init_TimerInterrupt0();
   
   guiCountReadAdc=0;
   guiPreRead=0;
-  preread();
+  //preread();
 
 }
 
