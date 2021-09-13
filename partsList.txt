@@ -1,0 +1,38 @@
+■
+高精度ＩＣ温度センサ　ＬＭ６０ＢＩＺ
+https://akizukidenshi.com/catalog/g/gI-02490/
+https://www.ti.com/jp/lit/ds/symlink/lm60.pdf
+
+■
+デジタル温度センサＤＳ１８Ｂ２０
+https://www.amazon.co.jp/dp/B074V4W4DX/
+http://akizukidenshi.com/download/ds/maxim/DS18B20.pdf
+
+■
+高感度マイクアンプキット AE-MICAMP
+http://akizukidenshi.com/catalog/g/gK-05757/
+https://akizukidenshi.com/download/ds/akizuki/ae-micamp_20200626.pdf
+
+■
+デジタルシリコンマイクモジュール（細ピンヘッダ版）
+https://akizukidenshi.com/catalog/g/gM-05577/
+https://akizukidenshi.com/download/ds/akizuki/AE-SPM0405HD4H.pdf
+https://akizukidenshi.com/download/SPM0405HD4H.pdf
+
+■
+フォトトランジスター　５ｍｍ丸型　９４０ｎｍ　Ｌ－５１ＲＯＰＴ１Ｄ１（１０個入）
+http://akizukidenshi.com/catalog/g/gI-04211/
+https://akizukidenshi.com/download/L-51ROPT1D1_A3.pdf
+
+■
+５ｍｍ赤外線ＬＥＤ　９４０ｎｍ　ＯＳＩ５ＦＵ５１１１Ｃ－４０
+http://akizukidenshi.com/catalog/g/gI-04299/
+https://akizukidenshi.com/download/OSI5FU5111C-40.pdf
+
+
+■
+高精度電流センサー（ＣＴセンサー）　分割型　Φ１０ｍｍ　SR-3702-150N/14Z
+http://akizukidenshi.com/catalog/g/gP-08960/
+https://akizukidenshi.com/download/ds/sarah/SR-3702_spec.pdf
+
+
