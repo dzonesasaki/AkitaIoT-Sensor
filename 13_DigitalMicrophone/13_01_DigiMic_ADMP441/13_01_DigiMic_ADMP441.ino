@@ -5,7 +5,7 @@
 // device : ADMP441 http://akizukidenshi.com/catalog/g/gK-06864/
 // ref to https://github.com/MhageGH/esp32_SoundRecorder
 
-#include "driver/i2s.h" //https://github.com/espressif/arduino-esp32/blob/master/tools/sdk/include/driver/driver/i2s.h
+#include "driver/i2s.h" //https://github.com/espressif/arduino-esp32/blob/master/tools/sdk/esp32/include/driver/include/driver/i2s.h
 
 // pin config
 #define PIN_I2S_BCLK 26
@@ -53,17 +53,21 @@ void I2S_Init(void) {
 }
 
 void skipNoisySound(){
+  size_t tmpt;
 	for (int j = 0; j < N_SKIP_SAMPLES ; j++) 
 	{
-		i2s_read_bytes(I2S_NUM_0, (char *)i8BufAll, N_LEN_BUF_ALL_BYTES, portMAX_DELAY);
+		//i2s_read_bytes(I2S_NUM_0, (char *)i8BufAll, N_LEN_BUF_ALL_BYTES, portMAX_DELAY);
+		i2s_read(I2S_NUM_0, (char *)i8BufAll, N_LEN_BUF_ALL_BYTES, &tmpt, portMAX_DELAY);
 	}
 }
 
 void getData(){
 	int32_t tmp32=0;
+  size_t tmpt;
 	for (int j = 0; j < N_ITTER_READ_BUF ; j++) 
 	{
-		i2s_read_bytes(I2S_NUM_0, (char *)i8BufAll, N_LEN_BUF_ALL_BYTES, portMAX_DELAY);
+		//i2s_read_bytes(I2S_NUM_0, (char *)i8BufAll, N_LEN_BUF_ALL_BYTES, portMAX_DELAY);
+		i2s_read(I2S_NUM_0, (char *)i8BufAll, N_LEN_BUF_ALL_BYTES, &tmpt, portMAX_DELAY);
 
 		for (int i = 0; i < N_LEN_BUF_2BYTE ; i++) {
 			tmp32 = (i8BufAll[N_BYTES_STRACT_PAR_SAMPLE*i + 3 +N_BYTE_STEP_LR] <<8) | i8BufAll[N_BYTES_STRACT_PAR_SAMPLE*i + 2 +N_BYTE_STEP_LR];
