@@ -6,7 +6,7 @@
 
 chatGPTとは、openAIのサイトにある自動チャットサービスです。
 
-(https://chat.openai.com/)[https://chat.openai.com/]
+( https://chat.openai.com/ )[https://chat.openai.com/]
 
 このチャットサービスは、質問に答えるだけでなく、プログラムを要求するとサンプルコードを出力してくれる機能も有しています。この章では、このコードを出力する機能を使う方法についての説明です。
 
@@ -34,7 +34,7 @@ chatGPTにコードを出力させるには、入力ウインドウに指示文�
 
 これをchatGPTの入力ウインドウに入れます。
 
-![chatGpt_input01.png](./figs/chatGpt_input01.png)
+![chatGpt_input01.png](chatGpt_input01.png)
 
 
 ただし、入力ウインドウ上で記述していると時間がかかり過ぎて、応答が止まってしまう場合があります。
